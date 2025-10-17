@@ -1,0 +1,424 @@
+---
+title: "class1_R_2025"
+author: "Babatunde Oyedele_101385"
+date: "2025-10-16"
+output: html_document
+---
+
+# Important definitions in data science
+ Statistics
+ Modelling
+ Computation
+ Calculus
+# Today’s class,we will study
+ Installation of R
+ Installation of R studio
+ Calculator in r
+ Data importation in R
+ Data description using numerical measures and graphs.
+# Data structure (Vectors, Factors, Lists, Data frame, matrix and arrays)
+# Vector: The foundational R data structure
+# Numeric
+```{r}
+ x <- c(0.5, 0.6)
+ age<-c(20,35,32,29)
+ summary(age)
+ ## Min. 1st Qu. Median Mean 3rd Qu. Max.
+ ## 20.00 26.75 30.50 29.00 32.75 35.00
+ age<-c(35,24,18,24)
+ mean(age)
+ ## [1] 25.25
+```
+# Logical
+```{r}
+ x <- c(TRUE, FALSE)
+ x <- c(T, F)
+```
+
+# character
+```{r}
+x<-c("a","b","c")
+class<-c("M","F","F","M")
+```
+
+# Integer
+```{r}
+x<-9:29
+```
+
+# Complex
+```{r}
+ x<-c(1+0i,2+4i)
+```
+
+# Matrixandoperationwithinmatrices
+```{r}
+ x<-matrix(1:6,nrow=2,ncol=3)
+ x
+ ## [,1][,2][,3]
+ ##[1,] 1 3 5
+ ##[2,] 2 4 6
+ (y<-matrix(1:6,nrow=3,ncol=2))
+ ## [,1][,2]
+ ##[1,] 1 4
+ ##[2,] 2 5
+ ##[3,] 3 6
+ x%*%y
+ ## [,1][,2]
+ ##[1,] 22 49
+ ##[2,] 28 64
+```
+
+# List
+```{r}
+ 
+ x<-list(1,"a",TRUE,1+4i)
+ x
+ ##[[1]]
+ ##[1]1
+ ##
+ ##[[2]]
+ ##[1]"a"
+ ##
+ ##[[3]]
+ ##[1]TRUE
+ ##
+ ##[[4]]
+ ##[1]1+4i
+```
+
+# Factor
+```{r}
+ x<-factor(c("yes","yes","no","yes","no"))
+```
+
+# CreateavectorwithNAsinit
+```{r}
+ x<-c(1,2,NA,10,3)
+```
+
+Return a logical vector indicating which elements are NA
+```{r}
+is.na(x)
+ ##[1]FALSEFALSE TRUEFALSEFALSE
+ x<-c(1,2,4,"NA",5)
+ bad<-is.na(x)
+ print(bad)
+ ##[1]FALSEFALSEFALSEFALSEFALSE
+ x[!bad]
+ ##[1]"1" "2" "4" "NA""5"
+```
+
+What if there are multiple R objects and you want to take the subset with no missing values in any of those objects?
+```{r}
+ x<-c(1,2,NA,4,NA,5)
+ y<-c("a","b",NA,"d",NA,"f")
+ good<-complete.cases(x,y)
+ good
+ ##[1] TRUE TRUEFALSE TRUEFALSE TRUE
+```
+
+# Coercion
+ 
+If character is present,in a vector,R convert everything in the vector to character
+strings.
+If a vector only contains logical and numbers,R will convert the logical to numbers, Every true becomes a 1,and every FALSE becomes 0
+```{r}
+
+ sum(c(TRUE,TRUE,FALSE,FALSE,FALSE))
+ ##[1]2
+```
+
+# Createdata
+
+Create data Using dataframe 
+Dataframe is more general than matrix How???
+Because dataframe can contain different modes of data (Numeric, character and so on) Similar to what you can see in SPSS,SAS,…
+ 
+ ###Let’s create a data frame
+```{r}
+studentID<-c(1,2,3,4,5)
+ math_score<-c(12,17,10,9,NA)
+ gender<-c("M","F","M","M","F")
+ it_score<-c(13,18,11,10,19)
+ scoredata<-data.frame(studentID,gender,math_score,it_score)
+ scoredata
+```
+
+# Createdatafromkeyboard
+Steps1.Create dataframe(ormatrix) with variable names
+steps2.Invoke the text editor in the data objected created at first step
+ 
+```{r}
+data_class2<-data.frame(height=numeric(0),weight=numeric(0),bmi=numeric
+ (0))
+data_class2<-edit(data_class2)
+```
+
+# Data Importation
+ R has some features that can allow to import data from different sources(It can be
+ text file,spreadsheet,or database)
+ 1. Data from excel
+ 2. Data statistical packages(SAS,SPSS,Stata)
+ 3. Data from Textfiles(ASCII,XML,Webscraping)
+ 4. Data from database management systems(SQL,MySQL,Oracle,Access)
+
+# HW1:Import data from Statistical package and from Database management systems
+```{r}
+data_class<-read.table("C:\\Users\\Pacy\\OneDrive\\Desktop\\Bigdatacourse\\class_data.txt")
+
+variable.names(data_class)
+##[1]"HEIGHT""WEIGHT"
+ 
+head(data_class)
+
+ 
+tail(data_class)
+
+data_class[10:20,]
+
+summary(data_class$WEIGHT)
+
+
+length(data_class$WEIGHT)
+
+data_class[,-1]
+```
+
+Incase you want to use data set built in R
+
+```{r}
+data()#listofdatasetscurrentlyavailable
+data("airquality")
+variable.names(airquality)
+ ##[1]"Ozone" "Solar.R""Wind" "Temp" "Month" "Day"
+str(airquality)
+ ##'data.frame': 153obs.of 6variables:
+ ## $Ozone :int 41361218NA2823198NA...
+ ## $Solar.R:int 190118149313NANA2999919194...
+ ## $Wind :num 7.4812.611.514.314.98.613.820.18.6...
+ ## $Temp :int 67727462566665596169...
+ ## $Month :int 5555555555...
+ ## $Day :int 12345678910...
+```
+
+
+Explorationdataanalysis
+
+Examinenumericalvariableusingcommonsummary
+```{r}
+data_class
+summary(data_class)
+str(data_class)
+```
+
+# SummaryStatistics
+```{r}
+ summary(data_class)
+ ## HEIGHT WEIGHT
+ ## Min. :150.0 Min. :42.0
+ ## 1stQu.:156.2 1stQu.:48.0
+ ## Median:159.5 Median:52.0
+ ## Mean :159.4 Mean :52.4
+ ## 3rdQu.:162.0 3rdQu.:56.0
+ ## Max. :170.0 Max. :65.0
+ apply(data_class,2,mean)
+ ## HEIGHT WEIGHT
+ ##159.38095 52.40476
+ apply(data_class,2,sd)
+ ## HEIGHT WEIGHT
+ ##4.2767235.806050
+ c(mean(data_class$HEIGHT),sd(data_class$HEIGHT))
+ ##[1]159.380952 4.276723
+ c(mean(data_class$WEIGHT),sd(data_class$WEIGHT))
+ ##[1]52.40476 5.80605
+ c(Mean=mean(data_class$HEIGHT),SD=sd(data_class$HEIGHT))
+ ## Mean SD
+ ##159.380952 4.276723
+ c(Mean=mean(data_class$WEIGHT),SD=sd(data_class$WEIGHT))
+```
+
+#Variationandcovariationusingbothnumericalandgraphs
+ 
+## Relationshipbetweenacategoricalandacontinuousvariable
+
+
+```{r}
+
+ data("iris")
+ head(iris)
+ ## Sepal.LengthSepal.WidthPetal.LengthPetal.WidthSpecies
+ ##1 5.1 3.5 1.4 0.2 setosa
+ ##2 4.9 3.0 1.4 0.2 setosa
+ ##3 4.7 3.2 1.3 0.2 setosa
+ ##4 4.6 3.1 1.5 0.2 setosa
+ ##5 5.0 3.6 1.4 0.2 setosa
+ ##6 5.4 3.9 1.7 0.4 setosa
+ mean(iris$Petal.Length)
+ ##[1]3.758
+ mean(iris$Petal.Length[iris$Species=="setosa"])
+ ##[1]1.462
+ mean(iris$Petal.Length[iris$Species=="versicolor"])
+ ##[1]4.26
+ mean(iris$Petal.Length[iris$Species=="virginica"])
+ ##[1]5.552
+ ##shortcut
+ by(iris$Petal.Length,iris$Species,mean)
+ ##iris$Species:setosa
+ ##[1]1.462
+ ##------------------------------------------------------------
+ ##iris$Species:versicolor
+ ##[1]4.26
+ ##------------------------------------------------------------
+ ##iris$Species:virginica
+ ##[1]5.552
+ by(iris$Petal.Length,iris$Species,sd)
+ 
+by(iris$Petal.Length,iris$Species,summary)
+```
+
+# Visualize the differences in continuous variables between categories using Box-and-whisker plot
+```{r}
+ boxplot(iris$Sepal.Length~iris$Species,data=iris, main="Comparison")
+```
+
+# Relationship between two categorical variables
+```{r}
+ ucba<-data.frame(UCBAdmissions)
+ head(ucba)
+ ##
+ Admit Gender Dept Freq
+ ## 1 Admitted Male A 512
+ ## 2 Rejected Male A 313
+ ## 3 Admitted Female
+ A 89
+ ## 4 Rejected Female
+ A 19
+##5Admitted Male B 353
+ ##6Rejected Male B 207
+ cross<-xtabs(Freq~Gender+Admit,data=ucba)
+ (cross<-xtabs(Freq~Gender+Admit,data=ucba))
+ ## Admit
+ ##Gender AdmittedRejected
+ ## Male 1198 1493
+ ## Female 557 1278
+ ##IstheregenderbiasinUCBgraduateadmissionprocess?
+ prop.table(cross,2)
+ ## Admit
+ ##Gender Admitted Rejected
+ ## Male 0.68262110.5387947
+ ## Female0.31737890.4612053
+```
+
+
+#  Simpson’sparadox
+Phenomenon,whereatrendthatappearsincombinedgroupsofdatadisappearsor reverseswhenbrokendownintogroups
+```{r}
+cross2<-xtabs(Freq~Gender+Admit,data=ucba[ucba$Dept=="A",])
+prop.table(cross2,1)
+```
+
+#  BarChart
+```{r}
+
+ dat<-read.table(text="ProdAProdBProdCProdD
+ 1110506070
+ 2120508065",header=TRUE)
+
+ barplot(as.matrix(dat),beside=FALSE,col=c("Red","green"))
+
+```
+
+```{r}
+#barplot(as.matrix(dat),beside=TRUE,col=c("gold3","red"))
+ dat <- read.table(text = "A B C D E F G
+ 1 10 80 30 90 70 60 90
+ 2 20 50 70 50 40 10 40
+ 3 60 80 80 60 60 30 160
+ 4 20 40 70 80 20 10 70", header = TRUE)
+ barplot(as.matrix(dat))
+```
+
+# Scatter Plot
+```{r}
+ plot(WEIGHT~HEIGHT,data=data_class)
+```
+
+```{r}
+plot(data_class$HEIGHT,data_class$WEIGHT)
+```
+
+```{r}
+plot(data_class[,1],data_class[,2])
+```
+
+```{r}
+cor(data_class$HEIGHT,data_class$WEIGHT)
+ ## [1] 0.2853684
+```
+
+# Linear Models
+```{r}
+
+ plot(WEIGHT~HEIGHT,data=data_class)
+ abline(lm(WEIGHT~HEIGHT,data=data_class)$coefficient)
+```
+
+
+```{r}
+data_lm<-lm(WEIGHT~HEIGHT,data=data_class)
+ summary(data_lm)
+ 
+hist(data_class$HEIGHT)
+```
+
+```{r}
+hist(data_class$WEIGHT,col = "blue")
+```
+
+# Linear with other line
+```{r}
+ plot(WEIGHT~HEIGHT,data=data_class)
+ abline(lm(WEIGHT~HEIGHT,data=data_class)$coefficient)
+ lines(lowess(data_class$HEIGHT,data_class$WEIGHT),col="blue")
+```
+
+```{r}
+cor(data_class$HEIGHT,data_class$WEIGHT)
+ ## [1] 0.2853684
+ model1<-lm(WEIGHT~HEIGHT,data=data_class)
+```
+
+# Data management
+# Create another Variable
+
+```{r}
+ attach(data_class)
+ (BMI<-WEIGHT/(HEIGHT/100)^2)
+ ## [1] 19.28938 20.39542 16.82423 22.49135 23.43750 21.36752 22.10029
+ 18.42653
+ ## [9] 18.02596 18.28678 23.43750 17.48179 22.34778 19.97919 19.47341
+ 19.47341
+ ## [17] 20.70312 20.83000 19.92187 20.70312 19.04432 23.61275 28.00000
+ 20.06095
+ ## [25] 21.71925 18.21832 20.06095 22.47659 18.19548 18.81892 24.12879
+ 21.48437
+ ## [33] 18.02596 23.14050 24.65483 21.07720 21.64412 17.47472 19.57168
+ 19.48696
+ ## [41] 19.47341 21.56454
+ (BMI<-round(WEIGHT/(HEIGHT/100)^2,digit=2))
+ 
+ head(cbind(data_class,BMI),n=5)
+ 
+ new_data_class<-cbind(data_class,BMI)
+ tail(cbind(data_class,BMI),n=10)
+```
+
+# SummaryofBMI
+```{r}
+summary(BMI)
+ ## Min.1stQu. Median Mean3rdQu. Max.
+ ## 16.82 19.10 20.23 20.64 22.00 28.00
+stem(BMI,scale=2)
+```
+
