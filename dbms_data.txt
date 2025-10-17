@@ -1,0 +1,11 @@
+StudentID,Name,Course,Grade,EnrollmentYear,ProjectsCompleted,DatabaseScore
+S001,John Smith,Database Systems,A,2022,3,92
+S002,Emily Johnson,SQL Fundamentals,B+,2023,2,88
+S003,Michael Brown,Data Modeling,A-,2022,4,90
+S004,Sarah Davis,Database Admin,B,2023,1,85
+S005,David Wilson,NoSQL Databases,A,2022,3,94
+S006,Jennifer Lee,SQL Fundamentals,B,2023,2,87
+S007,Robert Miller,Database Systems,A-,2022,4,91
+S008,Lisa Garcia,Data Modeling,C+,2023,1,78
+S009,James Anderson,Database Admin,B+,2022,3,89
+S010,Maria Martinez,NoSQL Databases,A,2023,2,93
